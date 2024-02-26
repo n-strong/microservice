@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload Profile Picture</title>
+</head>
+<body>
+  <h2>Would you like to upload a profile picture now or later?</h2>
+  <button onclick="uploadNow()">Now</button>
+  <button onclick="window.location.href='/users/<%= username %>'">Later</button>
+  <script>
+    function uploadNow() {
+      // Simulate clicking on an invisible file input
+      var input = document.createElement('input');
+      input.type = 'file';
+      input.onchange = e => {
+        // Handle the file upload process here
+        var file = e.target.files[0];
+        // Create a FormData object and redirect to user's profile page after upload
+        var formData = new FormData();
+        formData.append('profilePic', file);
+        fetch('/upload-profile-pic', {
+          method: 'POST',
+          body: formData,
+          credentials: 'include' // Include cookies
+        }).then(response => {
+          if (response.ok) {
+            window.location.href = '/users/<%= username %>';
+          } else {
+            alert('Failed to upload profile picture.');
+          }
+        });
+      };
+      input.click();
+    }
+  </script>
+</body>
+</html>

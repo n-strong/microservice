@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= user.username %>'s Text Entries</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <h1><%= user.username %>'s Text Page</h1>
+  </header>
+
+  <main>
+    <div class="text-entries-container">
+      <% if(user.textEntries && user.textEntries.length) { %>
+        <% user.textEntries.forEach(function(textEntry) { %>
+          <div class="text-entry">
+            <h2><%= textEntry.title %></h2>
+            <p><%= textEntry.content %></p>
+            <span>Posted on <%= textEntry.date %></span>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <p>No text entries found.</p>
+      <% } %>
+    </div>
+  </main>
+
+  <footer class="global-footer">
+    <nav>
+      <a href="/faq">F.A.Q.</a> |
+      <a href="/about">About</a> |
+      <a href="/contact">Contact</a>
+    </nav>  
+  </footer>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>F.A.Q.</title>
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <script>
+  // Function to toggle the visibility of the dropdown menu
+  function toggleDropdown() {
+    // Selects the dropdown content using its class name
+    var dropdownContent = document.querySelector('.dropdown-contentejs');
+    // Toggles the display style between 'block' and 'none' to show or hide the dropdown
+    dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+  }
+
+  // Defines a function for logging the user out
+  function logout() {
+    // Redirects the browser to the '/logout' URL, which handles the logout process
+    window.location.href = '/logout';
+  }
+
+  // Adds an event listener for clicks on the entire window
+  window.onclick = function(event) {
+    // Checks if the click is outside the profile picture or its container
+    if (!event.target.matches('.profile-pic-containerejs') && !event.target.matches('.profile-picejs')) {
+      // If the click is outside, it selects all dropdowns
+      var dropdowns = document.getElementsByClassName("dropdown-contentejs");
+      // Iterates through all dropdown elements
+      for (var i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        // Checks if the dropdown is currently displayed
+        if (openDropdown.style.display === 'block') {
+          // Hides the dropdown if it is currently shown
+          openDropdown.style.display = 'none';
+        }
+      }
+    }
+  }
+  function confirmRemoveProfilePic() {
+  var confirmAction = confirm("Remove profile picture?");
+  if (confirmAction) {
+    // if User clicked yes; redirect to the route that handles profile picture removal
+    window.location.href = '/remove-profile-pic';
+  } else {
+    // if (else) User clicked no; just redirect back to the user's main page
+    window.location.href = `/users/${<%= user.username %>}`;
+  }
+}
+  </script>
+</head>
+<body>
+<header>
+    <a href="/users/<%= user.username %>" class="home-button">Home</a>
+    <!-- Displays the greeting message and the user's username -->
+    <h1>F.A.Q.</h1>
+        
+    <!-- Container for the profile menu, which includes the profile picture and the dropdown menu -->
+    <div class="profile-menuejs">
+          
+        <!-- Container for the profile picture, which toggles the dropdown menu on click -->
+        <div class="profile-pic-containerejs" onclick="toggleDropdown()">
+          <!-- Updates the profile picture source to use the user's profile picture if it exists -->
+          <img src="<%= user.profilePicture || '/images/myblogdefaultimage1.png' %>" class="profile-picejs" alt="Profile Picture">
+        </div>
+          
+        <!-- The dropdown content that appears when the profile picture is clicked -->
+        <div class="dropdown-contentejs">
+          <!-- A link that triggers the hidden file input for uploading/changing the profile picture -->
+          <a href="#" onclick="document.getElementById('hiddenProfilePicInput').click();">Upload/Change Profile Picture</a>
+          <!-- Adds a link in the dropdown for removing the profile picture -->
+          <a href="#" onclick="confirmRemoveProfilePic()">Remove Profile Picture</a>      
+          <!-- A link that triggers the logout function -->
+          <a href="#" onclick="logout()">Logout</a>
+        </div>
+      
+        <!-- Inserts the form here for the profile picture upload -->
+        <form id="profilePicForm" action="/upload-profile-pic" method="POST" enctype="multipart/form-data" style="display: none;">
+          <input type="file" name="profilePic" id="hiddenProfilePicInput" onchange="document.getElementById('profilePicForm').submit();">
+        </form>    
+          
+          
+          <!-- A hidden file input for uploading profile pictures, triggered by clicking the 'Upload/Change Profile Picture' link. -->
+          <input type="file" id="hiddenProfilePicInput" style="display: none;" onchange="uploadProfilePic()">
+        </div>
+</header>
+
+  <main>
+    <main>
+        <h2>Frequently Asked Questions</h2>
+        <p>Here, you'll find answers to common questions about our blog.</p>
+        <ul>
+            <li>How do I create an account?</li>
+            <li>How do I reset my password?</li>
+            <li>How do I delete my account?</li>
+            <li>How do I create a new blog post?</li>
+            <li>How do I edit an existing blog post?</li>
+            <li>How do I delete a blog post?</li>
+        </ul>
+    </main>
+  </main>
+
+  <footer class="global-footer">
+    <nav>
+      <% if (user) { %>
+        <!-- If user is logged in, link to the dynamic home page -->
+        <a href="/users/<%= user.username %>">Home Page</a> |
+      <% } else { %>
+        <!-- If user is not logged in, link to the static home page -->
+        <a href="/index.html">Home Page</a> |
+      <% } %>
+      <a href="/faq">F.A.Q.</a> |
+      <a href="/about">About</a> |
+      <a href="/contact">Contact</a>
+    </nav>
+    <p>© 2024 My Blog</p>
+  </footer>
+</body>
+</html>

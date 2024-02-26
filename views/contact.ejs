@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header>
+    <% if (user) { %>
+      <a href="/users/<%= user.username %>" class="home-button">Home</a>
+      <div class="profile-menuejs">
+        <div class="profile-pic-containerejs" onclick="toggleDropdown()">
+          <img src="<%= user.profilePicture || '/images/myblogdefaultimage1.png' %>" class="profile-picejs" alt="Profile Picture">
+        </div>
+        <div class="dropdown-contentejs">
+          <a href="#" onclick="document.getElementById('hiddenProfilePicInput').click();">Upload/Change Profile Picture</a>
+          <a href="#" onclick="confirmRemoveProfilePic()">Remove Profile Picture</a>
+          <a href="#" onclick="logout()">Logout</a>
+        </div>
+        <form id="profilePicForm" action="/upload-profile-pic" method="POST" enctype="multipart/form-data" style="display: none;">
+          <input type="file" name="profilePic" id="hiddenProfilePicInput" onchange="document.getElementById('profilePicForm').submit();">
+        </form>
+      </div>
+    <% } else { %>
+      <a href="/index.html" class="home-button">Home</a>
+    <% } %>
+    <h1>Contact Us</h1>
+  </header>
+  
+  <main>
+    <h2>Contact Us</h2>
+    <p>If you have any questions or need support, feel free to reach out to us.</p>
+    <p>Email: support@myblog.com</p>
+    <p>Phone: +1 (555) 123-4567</p>
+    <p>You can also use our <a href="/support">support form</a> for specific inquiries.</p>
+  </main>
+
+  <footer class="global-footer">
+    <nav>
+      <% if (user) { %>
+        <a href="/users/<%= user.username %>">Home Page</a> |
+      <% } else { %>
+        <a href="/index.html">Home Page</a> |
+      <% } %>
+      <a href="/faq">F.A.Q.</a> |
+      <a href="/about">About</a> |
+      <a href="/contact">Contact</a>
+    </nav>
+    <p>© 2024 My Blog</p>
+  </footer>
+
+  <script src="/js/dropdown.js"></script>
+</body>
+</html>

@@ -1,0 +1,351 @@
+/* Very basic .css file that I intend on editing and updating. */
+
+/* This function adjusts the body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* This function adjusts the header */
+header {
+    background-color: #f3f3f3;
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+    z-index: 3;
+}
+
+/* This function adjusts the main content */
+footer {
+    background-color: #f3f3f3;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* This function adjusts the main content */
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+/* This function adjusts the header */
+#benefits, #costs {
+    text-align: center;
+}
+
+/* This function adjusts the header */
+#benefits ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* This function adjusts the header navigation */
+#benefits ul li {
+    margin: 10px 0;
+}
+
+/* This function adjusts the footer */
+.global-footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+/* This function adjusts the footer navigation */
+.global-footer nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+/* This function adjusts the home button*/
+.home-button {
+    display: inline-block;
+    padding: 12px 12px;
+    margin: 10px;
+    background-color: #de9c0d; /* Example background color, you can change this */
+    color: white; /* Text color */
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 10px;
+    position: absolute;
+    top: 30px; /* Adjust this value to move the button up or down */
+    left: 20px; /* Adjust this value to move the button left or right */
+}
+
+/* Styles for the circle dropdown that allows users to login or register on static html pages. */
+
+/* Positions the circle dropdown container; it's movable and can be placed anywhere in the header. */
+.circle-dropdown {
+    position: absolute;
+    top: 40px; /* Adjust this value to move vertically */
+    right: 35px; /* Adjust this value to move horizontally */
+    display: inline-block;
+    z-index: 2;
+  }
+  
+  /* Styles for the circle button itself. */
+  .circle-button {
+    border-radius: 50%; /* Creates a circular shape */
+    width: 50px; /* The width of the circle button */
+    height: 50px; /* The height of the circle button */
+    line-height: 50px; /* Centers the text vertically */
+    text-align: center; /* Centers the text horizontally */
+    background-color: #4CAF50; /* Background color of the button */
+    color: white; /* Color of the text/icon */
+    border: none; /* No border */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    z-index: 2;
+  }
+  
+  /* Styles for the dropdown content that appears when the circle button is clicked. */
+  .dropdown-content {
+    display: none; /* Initially hidden */
+    position: absolute;
+    background-color: #f9f9f9; /* Background color of dropdown items */
+    min-width: 160px; /* Minimum width of dropdown items */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Shadow for dropdown */
+    z-index: 2; /* Ensures dropdown appears above other content */
+    right: 0; /* Aligns the dropdown to the right */
+  }
+  
+  /* Styles for the links within the dropdown menu. */
+  .dropdown-content a {
+    color: black; /* Text color of dropdown items */
+    padding: 12px 16px; /* Padding inside dropdown items */
+    text-decoration: none; /* No underline on links */
+    display: block; /* Links take up the full width of the dropdown */
+    z-index: 2;
+  }
+  
+  /* Changes background color of dropdown items on hover for a visual effect. */
+  .dropdown-content a:hover {
+    background-color: #f1f1f1; /* Light grey background on hover */
+    z-index: 2;
+  }
+  
+  /* Displays the dropdown content when the user hovers over the circle dropdown container. */
+  .circle-dropdown:hover .dropdown-content {
+    display: block; /* Reveals dropdown content on hover */
+    z-index: 2;
+  }
+
+  
+/* Below this line,                                                                                  */
+/*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.circle-btnejs {
+  display: block; /* Sets the button to block level, meaning it will take up the full width available */
+  width: 50px; /* Sets the width of the button to 50 pixels */
+  height: 50px; /* Sets the height of the button to 50 pixels */
+  background-color: #f20909; /* Sets the background color of the button to a specific shade of red */
+  border-radius: 50%; /* Rounds the corners of the button to make it a circle */
+  text-align: center; /* Centers the text horizontally within the button */
+  line-height: 50px; /* Sets the line height to the same as the button's height to center the text vertically */
+  color: rgb(224, 13, 13); /* Sets the text color using RGB color values */
+  font-size: 30px; /* Sets the size of the font (the dot symbol in this case) inside the button */
+}
+
+.profile-menuejs {
+  position: fixed; /* Keeps the element in the same place even when the page is scrolled */
+  top: 20px; /* Positions the element 20 pixels from the top of the viewport */
+  right: 20px; /* Positions the element 20 pixels from the right of the viewport */
+  cursor: pointer; /* Changes the cursor to a pointer when hovered over to indicate it's clickable */
+}
+
+
+.profile-pic-containerejs {
+  position: relative; /* Establishes a positioning context for absolutely positioned elements inside */
+  width: 50px; /* Sets the width of the container to 50 pixels */
+  height: 50px; /* Sets the height of the container to 50 pixels */
+  border-radius: 50%; /* Rounds the corners to make the container circular */
+}
+
+.profile-picejs {
+  width: 100%; /* Makes the image fill the entire width of its container */
+  height: 100%; /* Makes the image fill the entire height of its container */
+  border-radius: 50%; /* Rounds the corners of the image to make it circular, matching the container */
+  object-fit: cover; /* Ensures the image covers the area of the container without distorting its aspect ratio */
+}
+
+.dropdown-contentejs {
+  display: none; /* Initially hides the dropdown content until triggered */
+  position: absolute; /* Positions the dropdown content absolutely relative to its positioned ancestor */
+  right: 0; /* Aligns the dropdown content to the right edge of its parent */
+  background-color: #f9f9f9; /* Sets the background color of the dropdown content */
+  min-width: 160px; /* Sets a minimum width for the dropdown content */
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Adds a shadow to make the dropdown visually distinct from the rest of the page */
+  z-index: 1; /* Ensures the dropdown content appears on top of other content */
+}
+
+
+.dropdown-contentejs a {
+  color: black; /* Sets the text color of the links within the dropdown to black */
+  padding: 12px 16px; /* Adds padding around the links for better spacing and readability */
+  text-decoration: none; /* Removes the underline from the links to make them look cleaner */
+  display: block; /* Makes each link fill its own line, enhancing the dropdown menu layout */
+}
+
+.dropdown-contentejs a:hover {background-color: #f1f1f1; /* Changes the background color of the links on hover for visual feedback */}
+
+.user-page-heading {
+    text-align: center;
+  }
+
+/* Search container styles */
+.search-container {
+    order: 2; /* Ensure the search container is to the right */
+  }
+  
+/* Search input styles */
+.search-input {
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px 0 0 20px; /* Rounded left corners */
+    outline: none;
+}
+  
+/* Search button styles */
+.search-btn {
+    padding: 8px 15px;
+    background-color: #333; /* Dark background for the button */
+    color: white;
+    border: none;
+    border-radius: 0 20px 20px 0; /* Rounded right corners */
+    cursor: pointer;
+}
+  
+.search-btn:hover {
+    background-color: #555; /* Slightly lighter background on hover */
+}
+
+
+/* ///////////////////////////////////////////////////////////////////////Banner container styles AND Button on banner image////////////////////////////////////////////////////////// */
+.banner-container {
+    background-image: url('/images/defaultbanner.jpg'); /* Path to the default banner image */
+    background-size: cover; /* Ensures the image covers the banner area */
+    background-position: center; /* Centers the background image */
+    background-repeat: no-repeat; /* No repeat of the background */
+    height: 300px; /* Adjust if needed */
+    width: 100%; /* This will make sure it covers the full width including any scrollbar */
+    padding: 0; /* Ensure no padding */
+    margin: 0; /* Ensure no margin */
+    position: absolute; /* Use absolute positioning */
+    left: 0; /* Align to the left edge */
+    top: 80px; /* Align to the top edge */
+    z-index: 0; /* Ensure it stays behind content */
+}
+
+.banner-dropdown {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1; /* Ensure it's above the banner image */
+  }
+
+/* Styling the dropdown button */
+.banner-dropdown-btn {
+    position: absolute;
+    background-color: white; /* Button background color */
+    color: black; /* Button text color */
+    padding: 8px 12px;
+    border: 4px solid orange; /* Orange border */
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    left: -55px; /* Align to the left edge */
+    top: 65px; /* Align to the top edge */
+    z-index: 1;
+  }
+
+/* Hiding the dropdown content by default */
+.banner-dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    left: -235px; /* Align to the left edge or adjust length of box. */
+    top: 105px; /* Moves dropdown box vertically */
+    right: 12px; /* Moves dropdown box horizontally */
+    z-index: 1;
+  }
+
+/* Hover state for banner dropdown button */
+.banner-dropbtn:hover + .banner-dropdown-content {
+    display: block; /* Show the dropdown content when hovering over the button */
+    z-index: 1;
+}
+
+/* Styling the links in the dropdown */
+.banner-dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    z-index: 1;
+  }
+
+/* Showing the dropdown content on click (JavaScript needed) */
+.banner-dropdown-btn:active + .banner-dropdown-content,
+.banner-dropdown-btn:focus + .banner-dropdown-content {
+  display: block;
+  z-index: 1;
+}
+
+/* Optional: Add hover effect for dropdown links */
+.banner-dropdown-content a:hover {
+  background-color: #f1f1f1;
+  z-index: 1;
+}
+
+.user-nav {
+    width: 100%; /* Full width */
+    background-color: #000000; /* Background color */
+    position: absolute; /* Absolute positioning */
+    top: 380px; /* Adjust if necessary to move the navbar down */
+    z-index: 5;
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    /* height: 90px; /* Adjust this value to change the height of the nav */
+    /* bottom: -2px; /* Adjust this value to place the nav below the banner */
+    /* left: -10px; */
+    right: 0;
+    /* text-align: center; */
+    /* padding: 10px 0; /* This adds some space above and below the links */
+    /* overflow: auto;Ensures the content is contained within the navigation bar */
+    z-index: 5;
+  }
+
+.user-nav a {
+  /* float: left; *//* Aligns the links to the left */ /* Remove float: left; as flexbox will now handle the layout */
+  display: block; /* Makes the links take up the full space available */
+  padding: 14px 16px; /* Adds padding inside the links for spacing */
+  text-decoration: none; /* Removes the underline from the links */
+  font-size: 17px; /* Sets the font size for the links */
+  color: white; /* Sets the text color for the links */
+  background-color: #c68907; /* Sets the background color for the links */
+  /* text-align: center; *//* Centers the text inside the links */
+  border-right: 1px solid #bbb; *//* Adds a right border to each link */
+  /* left: 80px; */
+}
+
+.user-nav a:last-child {
+  border-right: none; /* Removes the border from the last link */
+}
+
+.user-nav a:hover {
+  background-color: #ddd; /* Changes the background color on hover */
+  color: black; /* Changes the text color on hover */
+}
+
+/* .user-nav a:not(:last-child) {
+   border-right: 1px solid #bbb; Border for all but last child
+} */
