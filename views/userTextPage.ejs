@@ -1,17 +1,193 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= user.username %>'s Text Entries</title>
-  <link rel="stylesheet" href="/css/style.css">
+<!DOCTYPE html> <!-- Declares definition of the document type as HTML5 -->
+<html lang="en"> <!-- Opening tag for the HTML document specifies the language as English -->
+<head> <!-- Head element contains meta-information about the document -->
+  <meta charset="UTF-8"> <!-- Defines the character set for the document to be UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Sets the viewport width and initial scale for mobile devices -->
+  <title><%= user.username %>'s Text Page<</title> <!-- The title of the webpage, displayed on the browser tab. -->
+  <link rel="stylesheet" href="/css/style.css"> <!-- Links to an external CSS file for styling the page -->
+ 
+  <script>
+  // Function to toggle the visibility of the dropdown menu
+  function toggleDropdown() {
+    // Selects the dropdown content using its class name
+    var dropdownContent = document.querySelector('.dropdown-contentejs');
+    // Toggles the display style between 'block' and 'none' to show or hide the dropdown
+    dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+  }
+ 
+  // Defines a function for logging the user out
+  function logout() {
+    // Redirects the browser to the '/logout' URL, which handles the logout process
+    window.location.href = '/logout';
+  }
+ 
+  // Adds an event listener for clicks on the entire window
+  window.onclick = function(event) {
+    // Checks if the click is outside the profile picture or its container
+    if (!event.target.matches('.profile-pic-containerejs') && !event.target.matches('.profile-picejs')) {
+      // If the click is outside, it selects all dropdowns
+      var dropdowns = document.getElementsByClassName("dropdown-contentejs");
+      // Iterates through all dropdown elements
+      for (var i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        // Checks if the dropdown is currently displayed
+        if (openDropdown.style.display === 'block') {
+          // Hides the dropdown if it is currently shown
+          openDropdown.style.display = 'none';
+        }
+      }
+    }
+  }
+ // function confirmRemoveProfilePic() {
+ // var confirmAction = confirm("Remove profile p/icture?");
+ // if (confirmAction) {
+    // if User clicked yes; redirect to the route that handles profile picture removal
+   // window.location.href = '/remove-profile-pic';
+ // } else {
+    // if (else) User clicked no; just redirect back to the user's main page
+    //window.location.href = `/users/${<% user.username %>}`;
+  //}
+//}
+  </script>
 </head>
 <body>
-  <header>
-    <h1><%= user.username %>'s Text Page</h1>
-  </header>
-
+<header>
+  <!-- Displays the greeting message and the user's username -->
+  <h1>
+    <div class="search-container">
+      <form action="/search" method="GET">
+        <input type="text" placeholder="Search..." name="search" class="search-input">
+        <button type="submit" class="search-btn">🔍</button>
+      </form>
+    </div>
+  </h1>
+ 
+  <!-- Container for the profile menu, which includes the profile picture and the dropdown menu -->
+  <div class="profile-menuejs">
+   
+    <!-- Container for the profile picture, which toggles the dropdown menu on click -->
+    <div class="profile-pic-containerejs" onclick="toggleDropdown()">
+      <!-- Updates the profile picture source to use the user's profile picture if it exists -->
+      <img src="<%= user.profilePicture || '/images/myblogdefaultimage1.png' %>" class="profile-picejs" alt="Profile Picture">
+    </div>
+   
+    <!-- The dropdown content that appears when the profile picture is clicked -->
+    <div class="dropdown-contentejs">
+      <!-- A link that triggers the hidden file input for uploading/changing the profile picture -->
+      <a href="#" onclick="document.getElementById('hiddenProfilePicInput').click();">Upload/Change Profile Picture</a>
+      <!-- Adds a link in the dropdown for removing the profile picture -->
+      <a href="#" onclick="confirmRemoveProfilePic()">Remove Profile Picture</a>      
+      <!-- A link that triggers the logout function -->
+      <a href="#" onclick="logout()">Logout</a>
+    </div>
+ 
+    <!-- Inserts the form here for the profile picture upload -->
+    <form id="profilePicForm" action="/upload-profile-pic" method="POST" enctype="multipart/form-data" style="display: none;">
+      <input type="file" name="profilePic" id="hiddenProfilePicInput" onchange="document.getElementById('profilePicForm').submit();">
+    </form>    
+   
+   
+    <!-- A hidden file input for uploading profile pictures, triggered by clicking the 'Upload/Change Profile Picture' link. -->
+    <input type="file" id="hiddenProfilePicInput" style="display: none;" onchange="uploadProfilePic()">
+  </div>
+</header>
+ 
   <main>
+    <!-- In userPage.ejs or a similar file -->
+    <div class="banner-container">
+      <!-- Other banner content goes here -->
+      <form id="bannerImageForm" action="/upload-banner-image" method="POST" enctype="multipart/form-data" style="display: none;">
+        <input type="file" name="bannerImage" id="hiddenBannerInput" onchange="document.getElementById('bannerImageForm').submit();">
+      </form>
+      <!-- Dropdown Button -->
+      <div class="banner-dropdown">
+        <button class="banner-dropdown-btn">...</button>
+        <div class="banner-dropdown-content">
+          <!-- Link to trigger the hidden input for banner image upload -->
+          <a href="#" onclick="document.getElementById('hiddenBannerInput').click();">Edit/Upload banner image</a>
+          <!-- Link for deleting the banner image -->
+          <form id="deleteBannerForm" action="/remove-banner-image" method="POST" style="display: none;"></form>
+          <a href="#" onclick="confirmRemoveBanner()">Delete banner image</a>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="user-nav">
+      <a href="/users/<%= user.username %>">Blog</a>
+      <a href="/users/<%= user.username %>/text">Text</a>
+      <a href="/users/<%= user.username %>/photo">Pic</a>
+      <a href="/users/<%= user.username %>/video">Video</a>
+    </div>
+    <br>
+    <br />
+    <br>
+    <br />
+    <br>
+    <br />
+    <br>
+    <br />
+    <br>
+    <br />
+    <br>
+    <br />
+    <section>
+     
+      <!-- "<br>" is used because the banner image will not display as I want it without using the absolute positioning in the .css -->
+      <!-- I made the height a static 300px, that way it's universally consistent across all user profiles. -->
+      <h2><%= user.username %>'s Text Page</h2>
+    </section>
+
+
+
+    <!--MICROSERVICE HERE-->
+    <input type="text" name="userInput" id="userInput" placeholder="Enter text here to make a post!" required>
+    <button type="submit" onclick="blog_post()">Enter</button>
+
+  <script>
+    // function to handle user blog post as string
+    function blog_post(){
+      let username = "<%= user.username %>";
+      let post = document.getElementById("userInput").value; // assign variable to blog post 
+
+      // send fetch request to Flask server
+      fetch('http://localhost:5000/blog_post', {
+        method: 'POST',
+        headers:{
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          'post': post,
+          'username': username
+        }) // package blog post as json
+        
+      })
+
+      // check Flask response signal
+      .then(response => {
+        if(!response.ok) {
+          throw new Error('Error with network response.');
+        }
+        console.log(response)
+        return response.json(); // send blog post to Flask
+      })
+
+      .then(data => {
+        console.log('Response from server:', data);
+        // check if reload signal received
+       // if(data.reload){
+          window.location.reload();
+       // }
+      })
+      // catch fetch() errors
+      .catch(error => {
+        console.error('fetch() failed.', erorr)
+      })
+    }
+
+  </script>
+
+  <!--END MICROSERVICE-->
+
     <div class="text-entries-container">
       <% if(user.textEntries && user.textEntries.length) { %>
         <% user.textEntries.forEach(function(textEntry) { %>
@@ -25,14 +201,50 @@
         <p>No text entries found.</p>
       <% } %>
     </div>
-  </main>
 
+   
+  </main>
+ 
   <footer class="global-footer">
     <nav>
       <a href="/faq">F.A.Q.</a> |
       <a href="/about">About</a> |
       <a href="/contact">Contact</a>
     </nav>  
-  </footer>
+</footer>
+<script>
+  function uploadBannerImage() {
+    document.getElementById('bannerImageForm').submit();
+}
+ 
+  function confirmRemoveBanner() {
+  var confirmAction = confirm("Remove banner image?");
+  if (confirmAction) {
+    window.location.href = '/remove-banner-image';
+  }
+}
+ 
+  // Function to toggle the banner dropdown
+  document.addEventListener('DOMContentLoaded', function() {
+    // Select the dropdown button and the dropdown content
+    var dropdownBtn = document.querySelector('.banner-dropdown-btn');
+    var dropdownContent = document.querySelector('.banner-dropdown-content');
+ 
+    // Add click event listener to the dropdown button
+    dropdownBtn.addEventListener('click', function(event) {
+      // Prevent the click from "bubbling" up to the window
+      event.stopPropagation();
+      // Toggle the display of the dropdown content
+      dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+    });
+ 
+    // Add click event listener to the window to close the dropdown when clicking outside
+    window.addEventListener('click', function() {
+      if (dropdownContent.style.display === 'block') {
+        dropdownContent.style.display = 'none';
+      }
+    });
+  });
+</script>
 </body>
 </html>
